@@ -21,3 +21,9 @@ db.sqlite3
 
 # VSCode
 .vscode/
+
+.env
+*.sqlite3
+staticfiles/
+__pycache__/
+*.pyc
