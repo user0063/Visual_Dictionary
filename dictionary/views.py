@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
-import requests, random
+import requests, random, os
 from .models import Word, History
 from django.contrib.auth.decorators import login_required
 from googletrans import Translator
@@ -101,7 +101,7 @@ def home_view(request):
                         })
 
                 # 📷 Fetch image from Pexels
-                PEXELS_API_KEY = 'iZ54xYHuvnYTqcQDfl6cpaewIq00BuVpdPr4I8gqRLz7qI7ZsGTK0tsb'
+                PEXELS_API_KEY = os.getenv('PEXELS_API_KEY')
                 headers = { "Authorization": PEXELS_API_KEY }
                 image_response = requests.get(
                     f'https://api.pexels.com/v1/search?query={search_word}&per_page=1',
