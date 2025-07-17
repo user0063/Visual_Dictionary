@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout
 import requests, random, os
 from .models import Word, History
 from django.contrib.auth.decorators import login_required
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 from .forms import CustomUserCreationForm, CustomLoginForm
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -86,9 +86,8 @@ def home_view(request):
                         antonyms = definition.get('antonyms', [])
 
                         try:
-                            translator = Translator()
-                            tamil_def = translator.translate(def_text, dest='ta').text
-                        except:
+                            tamil_def = GoogleTranslator(source='auto', target='ta').translate(def_text)
+                        except Exception as e:
                             tamil_def = ""
 
                         all_meanings_list.append({
